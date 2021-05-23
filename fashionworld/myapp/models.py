@@ -70,3 +70,7 @@ class Order(models.Model):
     total=models.PositiveIntegerField()
     order_status=models.CharField(max_length=264,choices=ORDER_STATUS)
     created_at=models.DateTimeField(auto_now_add=True)
+    
+    
+    
+    #Hello Narendra
