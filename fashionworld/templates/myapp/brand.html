@@ -1,0 +1,21 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block body_block %}
+<main class="container my-4">
+<h3 class="my-4 pb-1">Brands</h3>
+<div class="row">
+{% for b in brand %}
+<div class="col-md-3 mb-4">
+<div class="card shadow">
+<a href="brand_product/{{b.id}}"><img src="{{b.image.url}}" height=200px alt={{b.title}}></a>
+</div>
+<div class="card-header">
+<h5><a href="brand_product/{{b.id}}">{{b.title}}</a></h5>
+</div>
+</div>
+
+{% endfor %}
+</div>
+</main>
+
+{% endblock %}

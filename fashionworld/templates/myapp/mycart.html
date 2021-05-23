@@ -1,0 +1,57 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block body_block %}
+<main class="container my-4">
+<h3 class="my-4 pb-1">Items in Cart</h3>
+<div class="row">
+<div class="col-md-12">
+<table class="table">
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Product</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Subtotal</th>
+    <th>Action</th>
+  </tr>
+</thead>
+<tbody>
+{% for cp in cart.cartproduct_set.all %}
+<tr>
+<td>{{forloop.counter}}</td>
+<td>{{cp.product.title}}</td>
+<td><img src="{{cp.product.image.url}}" height=70px></td>
+<td>{{cp.rate}}</td>
+<td>{{cp.quantity}}</td>
+<td>{{cp.subtotal}}</td>
+<td>
+<a href="{% url 'managecart' cp.id %}?action=inc" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+<a href="{% url 'managecart' cp.id %}?action=rmv" class="btn btn-danger"><i class="fa fa-remove"></i></a>
+<a href="{% url 'managecart' cp.id %}?action=dec" class="btn btn-warning"><i class="fa fa-minus"></i></a>
+</td>
+</tr>
+{% empty %}
+<h3>No Products</h3>
+{% endfor %}
+<tr>
+<th colspan="5">Total</th>
+<th>{{cart.total}}</th>
+</tr>
+{% if cart.cartproduct_set.all %}
+<tr>
+<td colspan="6">
+<a href="{% url 'emptycart' %}" class="btn btn-danger">EmptyCart</a>
+</td>
+<td>
+<a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+</td>
+</tr>
+{% endif %}
+</tbody>
+</table>
+</div>
+</div>
+</main>
+{% endblock %}

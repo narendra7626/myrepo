@@ -1,0 +1,41 @@
+{% extends 'myapp/base.html' %}
+{% block body_block %}
+<main class="container my-4">
+<div class="row">
+<h3 class="my-4 pb-1">{{product.title}}</h3>
+<div class="col-md-6">
+<div class="card shadow mb-4"><img src="{{product.image.url}}"></div>
+<h6>Category:<a href="{% url 'cat_product' product.category.id %}">{{product.category}}</a></h6>
+<h6>Brand:<a href="{% url 'brand_product' product.brand.id %}">{{product.brand}}</a></h6>
+</div>
+<div class="col-md-6">
+<h4>{{product.title}}</h4>
+<h6><strike><font color="red">RS {{product.mark_price}}</font></strike>&nbsp;&nbsp;<font color="green">RS {{product.sell_price}}</font></h6>
+<h6>{{product.return_policy}}</h6>
+<h6>{{product.warranty}}</h6>
+<h6>views:<font color="red">{{product.viewcount}}</font></h6>
+<p><font color="green">{{product.detail}}</font></p>
+<a href="#" class="btn btn-secondary">Add Cart</a>
+</div>
+</div>
+<div class="row">
+<h3 class="my-4 pb-1">Related Products</h3>
+{% for r in related %}
+<div class="col-md-3 mb-4">
+<div class="card shadow">
+<a href="/product_detail/{{r.id}}"><img src="{{r.image.url}}" height=200px alt={{product.title}}></a>
+</div>
+<div class="card-header">
+<h5><a href="/product_detail/{{r.id}}">{{r.title}}</a></h5>
+<h6>Rs&nbsp;&nbsp<strike><font color="red">{{r.mark_price}}</font></strike>&nbsp;&nbsp;<font color="green">{{r.sell_price}}</h6>
+</div>
+<div class="card-footer">
+<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a>
+<a href="#" class="btn btn-danger"><i class="fa fa-heart"></i></a>
+<span class="float-right">4.5/5 <i class="fa fa-star text-warning"></i></span>
+</div>
+</div>
+{% endfor %}
+</div>
+</main>
+{% endblock %}

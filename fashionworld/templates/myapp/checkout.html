@@ -1,0 +1,56 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block body_block %}
+<main class="container my-4">
+<a href="{% url 'mycart' %}" class="btn btn-info">Update</a>
+<div class="row">
+<div class="col-md-7">
+<div class="jumbotron">
+<h3>Items in Cart</h3>
+<table class="table">
+<thead>
+  <tr>
+    <th>S.No</th>
+    <th>Product</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Subtotal</th>
+  </tr>
+</thead>
+<tbody>
+{% for cp in cart.cartproduct_set.all %}
+<tr>
+<td>{{forloop.counter}}</td>
+<td>{{cp.product.title}}</td>
+<td><img src="{{cp.product.image.url}}" height=70px></td>
+<td>{{cp.rate}}</td>
+<td>{{cp.quantity}}</td>
+<td>{{cp.subtotal}}</td>
+</tr>
+{% empty %}
+<h3>No Products</h3>
+{% endfor %}
+<tr>
+<th colspan="5">Total</th>
+<th>{{cart.total}}</th>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="col-md-5">
+<div class="jumbotron">
+<h2>Place Your Order</h2>
+<form method="POST">
+{% csrf_token %}
+{% bootstrap_form form %}
+<input type="submit" class="btn btn-success" value="Palce Order">
+</form>
+</div>
+</div>
+
+</div>
+</main>
+{% endblock %}

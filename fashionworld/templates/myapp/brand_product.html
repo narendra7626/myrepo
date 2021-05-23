@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+{% block body_block %}
+<main class="container my-4">
+<h3 class="my-4 pb-1">{{brand.title}}</h3>
+<div class="row">
+{% for product in data %}
+<div class="col-md-3 mb-4">
+<div class="card shadow">
+<a href="/product_detail/{{product.id}}"><img src="{{product.image.url}}" alt="{{product.title}}" height=200px></a>
+</div>
+<div class="card-body">
+<h6><a href="/product_detail/{{product.id}}">{{product.title}}</a></h6>
+<h6><strike><font color="red">RS {{product.mark_price}}</font></strike>&nbsp;&nbsp;<font color="green">RS {{product.sell_price}}</font></h6>
+</div>
+<div class="card-footer">
+<a href="/add_cart/{{product.id}}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></a>
+<a href="#" class="btn btn-danger"><i class="fa fa-heart"></i></a>
+<span class="float-right">4.5/5<i class="fa fa-star text-warning"></i></span>
+</div>
+</div>
+{% endfor %}
+</div>
+</main>
+{% endblock %}
